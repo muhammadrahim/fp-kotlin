@@ -4,7 +4,6 @@ class Cafe {
 
     fun buyCoffees(cc: CreditCard, n: Int): Pair<List<Coffee>, Charge> {
         val purchases: List<Pair<Coffee, Charge>> = List(n) { buyCoffee(cc) }
-
         val (coffees, charges) = purchases.unzip()
         charges.coalesce()
         return Pair(coffees, charges.reduce{ c1, c2 -> c1.combine(c2) })
@@ -32,7 +31,7 @@ data class Charge(val cc: CreditCard, private val price: Int) {
             )
 }
 
-class CreditCard
+interface CreditCard
 
 class Payments {
     fun charge(cc: CreditCard, price: Any) {

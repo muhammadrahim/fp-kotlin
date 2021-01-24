@@ -1,4 +1,3 @@
-import Example.abs
 import Example.factorial
 
 object Example {
@@ -7,8 +6,8 @@ object Example {
 
     fun factorial(i: Int): Int {
         fun go(n: Int, acc: Int): Int =
-            if (n <= 0) acc
-            else go(n - 1, n * acc)
+                if (n <= 0) acc
+                else go(n - 1, n * acc)
         return go(i, 1)
     }
 
@@ -19,30 +18,15 @@ object Example {
 
     fun <A> findFirst(xs: Array<A>, p: (A) -> Boolean): Int {
         tailrec fun loop(n: Int): Int =
-            when {
-                n >= xs.size -> -1
-                p(xs[n]) -> n
-                else -> loop(n+1)
-            }
+                when {
+                    n >= xs.size -> -1
+                    p(xs[n]) -> n
+                    else -> loop(n + 1)
+                }
         return loop(0)
     }
 
-    fun <A> isSorted(aa: List<A>, order: (A,A) -> Boolean): Boolean {
-        tailrec fun loop(n: List<A>): Boolean = when {
-            n.tail.isNullOrEmpty() -> true
-            !order(n.head, n.tail.head) -> false
-            else -> loop(n.tail)
-        }
-        return loop(aa)
-    }
-
-    val <T> List<T>.tail: List<T>
-        get() = drop(1)
-    val <T> List<T>.head: T
-        get() = first()
-
-
-    fun <A,B,C> partial1(a: A, f: (A,B) -> C): (B) -> C = { b -> f(a,b) }
+    fun <A, B, C> partial1(a: A, f: (A, B) -> C): (B) -> C = { b -> f(a, b) }
 }
 
 fun main() {
